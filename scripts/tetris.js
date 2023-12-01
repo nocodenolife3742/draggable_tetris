@@ -360,6 +360,34 @@ function pause_game() {
 }
 
 requestAnimationFrame(update_canvas);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft" || event.key === "a") {
+        if (Pause)
+            return;
+        for (let i = 0; i < active_block.length; i++) {
+            if (active_block[i].is_click)
+                active_block[i].move_left();
+        }
+        console.log(active_block);
+    }
+    if (event.key === "ArrowRight" || event.key === "d") {
+        if (Pause)
+            return;
+        for (let i = 0; i < active_block.length; i++) {
+            if (active_block[i].is_click)
+                active_block[i].move_right();
+        }
+    }
+    if (event.key === "ArrowUp" || event.key === "w") {
+        if (Pause)
+            return;
+        for (let i = 0; i < active_block.length; i++) {
+            if (active_block[i].is_click)
+                active_block[i].rotate();
+        }
+    }
+})
 document.getElementById("start").addEventListener("click", start_game);
 document.getElementById("pause").addEventListener("click", pause_game);
 document.getElementById("reset").addEventListener("click", reset_game);
@@ -495,5 +523,7 @@ canvas.onmouseleave = (event) => {
     event.preventDefault();
     is_dragging = false;
 }
+
+
 
 reset_game();
